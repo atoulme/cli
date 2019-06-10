@@ -31,8 +31,6 @@ Response: JSON representation of the table list in the database
 	`,
 
 	Run: func(cmd *cobra.Command, args []string) {
-		payload := []byte{}
-
 		id, err := cmd.Flags().GetInt("organization-id")
 		if err != nil {
 			util.PrintErrorFatal(err)
@@ -42,7 +40,7 @@ Response: JSON representation of the table list in the database
 			id = getOrgId()
 		}
 
-		data, err := apiRequest(fmt.Sprintf("/organizations/%d/dw/tables", id), "GET", payload)
+		data, err := apiRequest(fmt.Sprintf("/organizations/%d/dw/tables", id), "GET", []byte{})
 		if err != nil {
 			util.PrintErrorFatal(err)
 		}
